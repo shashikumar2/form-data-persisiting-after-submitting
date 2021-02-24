@@ -1,0 +1,90 @@
+<html>
+    <head>
+        
+        <title></title>
+    </head>
+    <body>
+        <div id='root'>
+        </div>
+        
+        <script src="C:\Users\SHASHI NIRANJAN\jan-2020-mern\react\js\react.development.js"></script>
+        <script src="C:\Users\SHASHI NIRANJAN\jan-2020-mern\react\js\react-dom.development.js"></script>
+        <script src="C:\Users\SHASHI NIRANJAN\jan-2020-mern\react\js\babel.js"></script>
+        <script src="../js/axios.js"></script>
+        
+        <script type="text/babel">
+        
+            const rootHandle = document.getElementById('root')
+            class FormPresist extends React.Component {
+                constructor(){
+                    super()
+                    this.state = {
+                        title:'',
+                        text:'',
+                        flag:true
+
+                    }
+                }
+                handleText = (e)=>{
+                            const title = e.target.value
+                            this.setState({title})
+                        
+                             localStorage.setItem('title',title)
+                            
+                            
+                }
+                handleTitle=(e)=>{
+                    const text = e.target.value
+                    this.setState({text})
+                    
+                       localStorage.setItem('text',text)
+                    
+                    
+                }
+                componentWillMount(e){
+                    const text =  localStorage.getItem('text');
+                    console.log(text)
+                    const title =  localStorage.getItem('title');
+                    this.setState({title,text})
+                    
+    //                 setTimeout(() => {
+    //                     const text =  localStorage.getItem('text');
+    //                 console.log(text)
+    //                 const title =  localStorage.getItem('title');
+    //                 this.setState({title,text})
+    // }, 0)
+                  
+                }
+                handleButton=()=>{
+                    this.setState(function(prevState){
+                        flag:!prevState.flag
+                    })
+                }
+                
+                handleSubmit= (e)=>{
+                    
+                    
+                }
+                render(){
+                    return(
+                        <div>
+                            <h1>Book Story</h1>
+                            <form onLoad={this.handleSubmit}>
+                                <label htmlFor='title'>Title</label>
+                                <input type="text" id='title' onChange={this.handleText} value={this.state.title}/>
+                                <br/>
+                                <label htmlFor='text'>body</label>
+                                <input type="text" id='text' onChange={this.handleTitle} value={this.state.text}/><br/>
+                                <input type="submit"/>
+                                </form>
+                            </div>
+                    )
+                }
+            }
+            ReactDOM.render(<FormPresist/>,rootHandle)
+            
+            
+           
+        </script>
+    </body>
+</html>
